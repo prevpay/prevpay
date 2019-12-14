@@ -1,0 +1,16 @@
+{
+    "declarations": {},
+    "sources": {
+        "https://github.com/CocoaPods/Specs.git": {
+            "source": "https://github.com/CocoaPods/Specs.git",
+            "count": 1
+        }
+    },
+    "libraries": {
+        "GoogleMaps": {
+            "name": "GoogleMaps",
+            "spec": "~> 3.1.0",
+            "count": 2
+        }
+    }
+}

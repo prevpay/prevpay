@@ -1,0 +1,19 @@
+<section class="wrapper">
+
+  <header>
+    <button class="close-button" (click)="dismiss()">X</button>
+  </header>
+
+  <section class="content">
+    <h1>{{ mission.name }}</h1>
+    <p>{{ mission.address }}</p>
+  </section>
+
+  <footer>
+    <app-button 
+      label="VAMOS NESSA"
+      expand="block">
+    </app-button>
+  </footer>
+
+</section>

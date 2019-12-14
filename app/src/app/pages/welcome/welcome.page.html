@@ -1,0 +1,78 @@
+<ion-content>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img src="./assets/illustrations/map-person.png" alt="">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="textbox">
+            <h1 class="slide-title">Hello there!</h1>
+            <p class="slide-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pretium, erat a dictum ullamcorpera.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img src="./assets/illustrations/survey-flow.png" alt="">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="textbox">
+            <h1 class="slide-title">Second Content</h1>
+            <p class="slide-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pretium, erat a dictum ullamcorpera.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <img src="./assets/illustrations/money-pork.png" alt="">
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="textbox">
+              <h1 class="slide-title">Third content</h1>
+              <p class="slide-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pretium, erat a dictum ullamcorpera.</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+
+      <ion-slide>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <img src="./assets/illustrations/result-chart.png" alt="">
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="textbox">
+                <h1 class="slide-title">Last One</h1>
+                <p class="slide-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pretium, erat a dictum ullamcorpera.</p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row style="margin-top: 30px">
+              <ion-col>
+                <app-button 
+                  label="VAMOS NESSA"
+                  expand="block"
+                  (onClick)="goToLogin()">
+                </app-button>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+        </ion-slide>
+  </ion-slides>
+</ion-content>

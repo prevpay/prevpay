@@ -1,0 +1,8 @@
+{
+  "name": "hackathon",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "8a6e6903"
+}

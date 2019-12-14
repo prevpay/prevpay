@@ -1,0 +1,42 @@
+<ion-content>
+  <app-header></app-header>
+  <main>
+    <section #mapRef class="map" [hidden]="!map.show"></section>
+    
+    <section class="content-header">
+      <h1>EXPLORE YOUR WORLD</h1>
+      <section [hidden]="!mission.show" class="mission-details">
+        <div class="card" (click)="showMissionDetailsModal()">
+
+          <div class="card-avatar">
+            <img src="./assets/images/brand.jpg" />
+          </div>
+
+          <div class="card-body">
+            <span class="card-title">{{ mission.name }}</span>
+            <span class="card-information">
+              <svg-icon src="./assets/icon/pin-outline.svg" [svgStyle]="{ 'width.px':12 , 'fill':'#b5b5b5' }"></svg-icon>
+              {{ mission.address }}
+            </span>
+            <span class="card-price">
+              {{ mission.price }}
+            </span>
+            <span class="card-action">
+              <button>Mais Detalhes</button>
+            </span>
+          </div>
+
+        </div>
+      </section>
+    </section>
+
+    <section class="fail-message-wrapper" [hidden]="!failMessage.show">
+      <fail-message 
+        [title]="failMessage.title"
+        [message]="failMessage.message"
+        [icon]="failMessage.icon"></fail-message>
+    </section>
+  </main>
+</ion-content>
+<app-tabs></app-tabs>
+
