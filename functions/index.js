@@ -1,8 +1,15 @@
 const functions = require('firebase-functions');
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log('app listening at 3000');
+const express = require('express');
+const admin = require('firebase-admin');
+
+admin.initializeApp(functions.config().firebase);
+
+const app = express();
+app.disable("x-powered-by");
+
+app.get("/users", async (req, res) => {
+   res.status(200).send(`You requested user with UID`);
 });
+
+exports.api = functions.https.onRequest(app);
