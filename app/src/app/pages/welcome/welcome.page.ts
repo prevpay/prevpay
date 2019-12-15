@@ -20,7 +20,7 @@ export class WelcomePage {
 
   goToLogin() {
     //this.localstorage.setValue('NOT_FIRST_VIEW', true);
-    this.router.navigate(['/explore']);
+    this.router.navigate(['/home']);
   }
 
 }

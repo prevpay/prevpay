@@ -1,0 +1,44 @@
+<ion-content>
+  <app-header [account]="account"></app-header>
+  <main>
+
+    <h1>PREVIDÊNCIA PRIVADA</h1>
+
+    <div class="card" (click)="showReceiveModal()">
+      <header class="card-header">
+        <span class="card-title">Previdência Vida Toda</span>
+        <span class="card-subtitle">Mongeral Aegon</span>
+      </header>
+      <footer class="card-footer">
+        <span class="card-information">Investimento mínimo: </span>
+        <span class="card-subtitle">R$ 100,00</span>
+      </footer>
+    </div>
+
+    <h1>SEGUROS</h1>
+
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide>
+        <div class="card">
+          <header class="card-header">
+            <span class="card-title">R$ 78,00 - 50% OFF</span>
+            <span class="card-subtitle">Seguro Automotivo</span>
+            <span class="card-information">Caixa Seguradora</span>
+          </header>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="card">
+          <header class="card-header">
+            <span class="card-title">R$ 49,00 - 40% OFF</span>
+            <span class="card-subtitle">Seguro Residencial</span>
+            <span class="card-information">Youse</span>
+          </header>
+        </div>
+      </ion-slide>
+    </ion-slides>
+
+ </main>
+</ion-content>
+
+<app-tabs></app-tabs>

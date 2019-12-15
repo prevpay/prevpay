@@ -1,40 +1,41 @@
 <ion-content>
-  <app-header></app-header>
+  <app-header [account]="account"></app-header>
   <main>
 
-    <h1>SEUS BOLETOS</h1>
+    <section class="actions-content">
+      <app-button 
+        label="Receber"
+        expand="block"
+        (onClick)="showReceiveModal()">
+      </app-button>
+      <app-button 
+        label="Investir"
+        expand="block"
+        (onClick)="showInvestModal()">
+      </app-button>
+    </section>
 
-    <div class="card">
+    <h1>Minhas Transações</h1>
+
+    <div class="card" *ngFor="let transaction of transactions;">
       <header class="card-header">
-        <span class="card-title">R$ 20,00</span>
-        <span class="card-subtitle">pago para Sabesp SA</span>
+        <span class="card-title">R$ {{ transaction.value }}</span>
+        <span class="card-subtitle">{{ transaction.type ? 'Adicionou' : 'Investiu' }} através do <strong>{{ transaction.from }}</strong></span>
       </header>
     </div>
 
-    <div class="card">
-      <header class="card-header">
-        <span class="card-title">R$ 40,00</span>
-        <span class="card-subtitle">pago para Eletropaulo SA</span>
-      </header>
-    </div>
+    <h1>Produtos Contratados</h1>
 
-
-    <!--
-    <div class="card">
+    <div class="card" *ngFor="let product of products;">
       <header class="card-header">
-        <span class="card-title">R$ 200,00</span>
-        <span class="card-subtitle">Caixa Seguradora Brasil S.A</span>
-        <span class="card-information">
-          <svg-icon src="./assets/icon/pin-outline.svg" [svgStyle]="{ 'width.px':12 , 'fill':'#b5b5b5' }"></svg-icon>
-          Rua da consolação, 2223, Apto 31...
-        </span>
+        <span class="card-title">{{ product.name }}</span>
+        <span class="card-subtitle">{{ product.company }}</span>
       </header>
       <footer class="card-footer">
-        <span class="card-subtitle">R$ 20,00</span>
-        <span class="card-information">10 min</span>
+        <span class="card-information">Investimento mínimo: </span>
+        <span class="card-subtitle">R$ {{ product.monthlyPrice }}</span>
       </footer>
     </div>
-    -->
 
  </main>
 </ion-content>

@@ -1,14 +1,16 @@
+<!--
 <header class="header">
   <div class="header-content">
     <div>
-      <span class="brand">HEY, VICTOR</span>
-      <span class="sub-brand">WELCOME TO THE APP</span>
+      <span class="brand">R$ 200,00</span>
+      <span class="sub-brand">SEU SALDO NO PREVPAY</span>
     </div>
     <div>
       <svg-icon src="./assets/icon/qr.svg" [svgStyle]="{ 'width.px':25, 'height.px':42 , 'fill':'#FFF' }"></svg-icon>
     </div>
   </div>
 </header>
+-->
 
 <!---
 <header class="header simple">
@@ -18,17 +20,17 @@
     </div>
   </div>
 </header>
-
+-->
 
 <header class="header profile">
   <div class="header-content">
     <div>
-      <svg-icon src="./assets/icon/person-outline.svg" [svgStyle]="{ 'width.px':30, 'height.px':40 , 'fill':'#FFF' }"></svg-icon>
+      <img src="https://avatars2.githubusercontent.com/u/11219999?s=460&v=4" class="avatar">
     </div>
     <div>
-      <span class="brand">VICTOR CAETANO</span>
-      <span class="sub-brand">EDITE SEU PERFIL</span>
+      <span class="brand">R$ {{ account?.currency }}</span>
+      <span class="sub-brand">ESTE É SEU SALDO NO PREVPAY</span>
     </div>
   </div>
 </header>
--->
+

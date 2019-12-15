@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/cubic-bezier-fc4a068b.js":
+/***/ "./node_modules/@ionic/core/dist/esm/cubic-bezier-2812fda3.js":
 /*!********************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/cubic-bezier-fc4a068b.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm/cubic-bezier-2812fda3.js ***!
   \********************************************************************/
 /*! exports provided: P, g */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -31,6 +31,9 @@ class Point {
  * P1: (0.32, 0.72)
  * P2: (0, 1)
  * P3: (1, 1)
+ *
+ * If you give a cubic bezier curve that never reaches the
+ * provided progression, this function will return NaN.
  */
 const getTimeGivenProgression = (p0, p1, p2, p3, progression) => {
     const tValues = solveCubicBezier(p0.y, p1.y, p2.y, p3.y, progression);
@@ -341,29 +344,30 @@ const blockedTags = ['script', 'style', 'iframe', 'meta', 'link', 'object', 'emb
 
 /***/ }),
 
-/***/ "./node_modules/@ionic/core/dist/esm/index-cd19f367.js":
+/***/ "./node_modules/@ionic/core/dist/esm/index-4d91f03a.js":
 /*!*************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/index-cd19f367.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm/index-4d91f03a.js ***!
   \*************************************************************/
-/*! exports provided: d, l, s, t */
+/*! exports provided: d, g, l, s, t */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return deepReady; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getIonPageElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return lifecycle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return setPageHidden; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return transition; });
-/* harmony import */ var _core_57385ee8_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core-57385ee8.js */ "./node_modules/@ionic/core/dist/esm/core-57385ee8.js");
+/* harmony import */ var _core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core-feeeff0d.js */ "./node_modules/@ionic/core/dist/esm/core-feeeff0d.js");
 /* harmony import */ var _constants_3c3e1099_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants-3c3e1099.js */ "./node_modules/@ionic/core/dist/esm/constants-3c3e1099.js");
 
 
 
-const iosTransitionAnimation = () => __webpack_require__.e(/*! import() | ios-transition-becf5388-js */ "ios-transition-becf5388-js").then(__webpack_require__.bind(null, /*! ./ios.transition-becf5388.js */ "./node_modules/@ionic/core/dist/esm/ios.transition-becf5388.js"));
-const mdTransitionAnimation = () => __webpack_require__.e(/*! import() | md-transition-f444ed6d-js */ "md-transition-f444ed6d-js").then(__webpack_require__.bind(null, /*! ./md.transition-f444ed6d.js */ "./node_modules/@ionic/core/dist/esm/md.transition-f444ed6d.js"));
+const iosTransitionAnimation = () => __webpack_require__.e(/*! import() | ios-transition-504cdd09-js */ "ios-transition-504cdd09-js").then(__webpack_require__.bind(null, /*! ./ios.transition-504cdd09.js */ "./node_modules/@ionic/core/dist/esm/ios.transition-504cdd09.js"));
+const mdTransitionAnimation = () => __webpack_require__.e(/*! import() | md-transition-fea2bbfb-js */ "md-transition-fea2bbfb-js").then(__webpack_require__.bind(null, /*! ./md.transition-fea2bbfb.js */ "./node_modules/@ionic/core/dist/esm/md.transition-fea2bbfb.js"));
 const transition = (opts) => {
     return new Promise((resolve, reject) => {
-        Object(_core_57385ee8_js__WEBPACK_IMPORTED_MODULE_0__["w"])(() => {
+        Object(_core_feeeff0d_js__WEBPACK_IMPORTED_MODULE_0__["w"])(() => {
             beforeTransition(opts);
             runTransition(opts).then(result => {
                 if (result.animation) {
@@ -432,16 +436,14 @@ const animation = async (animationBuilder, opts) => {
     }
     fireWillEvents(opts.enteringEl, opts.leavingEl);
     const didComplete = await playTransition(trans, opts);
-    // TODO: Remove AnimationBuilder
-    trans.hasCompleted = didComplete;
     if (opts.progressCallback) {
         opts.progressCallback(undefined);
     }
-    if (trans.hasCompleted) {
+    if (didComplete) {
         fireDidEvents(opts.enteringEl, opts.leavingEl);
     }
     return {
-        hasCompleted: trans.hasCompleted,
+        hasCompleted: didComplete,
         animation: trans
     };
 };
@@ -475,7 +477,16 @@ const notifyViewReady = async (viewIsReady, enteringEl) => {
 const playTransition = (trans, opts) => {
     const progressCallback = opts.progressCallback;
     // TODO: Remove AnimationBuilder
-    const promise = new Promise(resolve => trans.onFinish(resolve));
+    const promise = new Promise(resolve => {
+        trans.onFinish((currentStep) => {
+            if (typeof currentStep === 'number') {
+                resolve(currentStep === 1);
+            }
+            else if (trans.hasCompleted !== undefined) {
+                resolve(trans.hasCompleted);
+            }
+        });
+    });
     // cool, let's do this, start the transition
     if (progressCallback) {
         // this is a swipe to go back, just get the transition progress ready
@@ -547,6 +558,17 @@ const setZIndex = (enteringEl, leavingEl, direction) => {
     if (leavingEl !== undefined) {
         leavingEl.style.zIndex = '100';
     }
+};
+const getIonPageElement = (element) => {
+    if (element.classList.contains('ion-page')) {
+        return element;
+    }
+    const ionPage = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
+    if (ionPage) {
+        return ionPage;
+    }
+    // idk, return the original element so at least something animates and we don't have a null pointer
+    return element;
 };
 
 
@@ -654,6 +676,47 @@ const findCheckedOption = (el, tagName) => {
     return options.find((o) => o.checked === true);
 };
 
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/account.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/account.service.ts ***!
+  \*********************************************/
+/*! exports provided: AccountService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountService", function() { return AccountService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/es2015/index.js");
+
+
+
+let AccountService = class AccountService {
+    constructor(db) {
+        this.collection = db.collection('accounts');
+    }
+    getAccount(id) {
+        return this.collection.doc(id).valueChanges();
+    }
+    updateAccount(account, id) {
+        return this.collection.doc(id).update(account);
+    }
+};
+AccountService.ctorParameters = () => [
+    { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
+];
+AccountService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]])
+], AccountService);
 
 
 

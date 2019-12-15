@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"],{
 
-/***/ "./node_modules/@ionic/core/dist/esm-es5/cubic-bezier-fc4a068b.js":
+/***/ "./node_modules/@ionic/core/dist/esm-es5/cubic-bezier-2812fda3.js":
 /*!************************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm-es5/cubic-bezier-fc4a068b.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm-es5/cubic-bezier-2812fda3.js ***!
   \************************************************************************/
 /*! exports provided: P, g */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -32,6 +32,9 @@ var Point = /** @class */ (function () {
  * P1: (0.32, 0.72)
  * P2: (0, 1)
  * P3: (1, 1)
+ *
+ * If you give a cubic bezier curve that never reaches the
+ * provided progression, this function will return NaN.
  */
 var getTimeGivenProgression = function (p0, p1, p2, p3, progression) {
     var tValues = solveCubicBezier(p0.y, p1.y, p2.y, p3.y, progression);
@@ -395,6 +398,48 @@ var findCheckedOption = function (el, tagName) {
         : Array.from(el.querySelectorAll(tagName));
     return options.find(function (o) { return o.checked === true; });
 };
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/account.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/services/account.service.ts ***!
+  \*********************************************/
+/*! exports provided: AccountService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountService", function() { return AccountService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
+
+
+
+var AccountService = /** @class */ (function () {
+    function AccountService(db) {
+        this.collection = db.collection('accounts');
+    }
+    AccountService.prototype.getAccount = function (id) {
+        return this.collection.doc(id).valueChanges();
+    };
+    AccountService.prototype.updateAccount = function (account, id) {
+        return this.collection.doc(id).update(account);
+    };
+    AccountService.ctorParameters = function () { return [
+        { type: _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"] }
+    ]; };
+    AccountService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]])
+    ], AccountService);
+    return AccountService;
+}());
 
 
 

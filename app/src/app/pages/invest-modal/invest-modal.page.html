@@ -1,0 +1,39 @@
+<section class="wrapper">
+
+  <header>
+    <button class="close-button" (click)="dismiss()">X</button>
+  </header>
+
+  <section class="content">
+    <h1>Aplique seu PrevCash</h1>
+    <p>Escolha um dos produtos contratados para usar seu PrevCash:</p>
+  </section>
+
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let product of account.products;">
+      <div class="card" (click)="selectProduct(product)">
+        <header class="card-header">
+          <span class="card-title">{{ product.name }}</span>
+          <span class="card-subtitle">{{ product.company }}</span>
+        </header>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <section [hidden]="!selectedProduct" class="content">
+    <h3>Investimento</h3>
+    Valor: R$ 
+    <form [formGroup]="productValueForm">
+      <input type="number" name="value" formControlName="value" required />
+    </form>
+  </section>
+
+  <section [hidden]="!selectedProduct" class="content" style="padding-top: 20px">
+    <app-button 
+      label="Continuar"
+      expand="block"
+      (click)="onSubmit()">
+    </app-button>
+  </section>
+
+</section>

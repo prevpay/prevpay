@@ -1,0 +1,50 @@
+<section class="wrapper">
+
+  <header>
+    <button class="close-button" (click)="dismiss()">X</button>
+  </header>
+
+  <section class="content">
+    <h1>Adicionar dinheiro na minha carteira PrevPay</h1>
+    <p>Escolha um dos métodos de pagamento para carregar sua carteira:</p>
+  </section>
+
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <div class="card" (click)="selectType('boleto')">
+        <img src="./assets/images/boleto.png">
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="card" (click)="selectType('transferencia')">
+        <img src="./assets/images/transferencia.png">
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="card" (click)="selectType('ame')">
+        <img src="./assets/images/ame.png">
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="card" (click)="selectType('picpay')">
+        <img src="./assets/images/picpay.png">
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <section [hidden]="!transaction.from" class="content">
+    <h3>Pagamento com <strong>{{ transaction.from }}</strong></h3>
+    Valor: R$ <form [formGroup]="transactionValueForm">
+      <input type="number" name="value" formControlName="value" required />
+    </form>
+  </section>
+
+  <section [hidden]="!transaction.from" class="content" style="padding-top: 20px">
+    <app-button 
+      label="Continuar"
+      expand="block"
+      (click)="onSubmit()">
+    </app-button>
+  </section>
+
+</section>

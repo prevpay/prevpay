@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap');
+
+:root {
+
+  //AppFont
+ --ion-font-family: "Quicksand", sans-serif;
+ 
+}
+
+ion-content {
+  --background: #36D1DC;
+  --background: linear-gradient(to right, #5B86E5, #36D1DC);
+
+  main {
+    width: 100%;
+    height: 82%;
+    padding: 20px 20px 80px 20px;
+    background: #F6F8FC;
+    position: absolute;
+    border-radius: 25px 25px 0 0;
+    overflow: scroll;
+  }
+}
